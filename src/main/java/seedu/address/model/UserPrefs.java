@@ -30,7 +30,7 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getProductInfoBookFilePath() {
         return addressBookFilePath;
     }
 

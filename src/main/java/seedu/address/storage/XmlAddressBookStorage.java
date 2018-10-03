@@ -28,7 +28,7 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getProductInfoBookFilePath() {
         return filePath;
     }
 

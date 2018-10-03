@@ -55,9 +55,9 @@ Format: `inventory`
 
 Lists all products offered by the store in alphabetical order
 
-=== Search for a product: `search`
+=== Search for a product: `find`
 
-Format: `search <product name>`
+Format: `find <product name>`
 
 Displays the product and basic information related to it
 The search is case insensitive e.g ‘potato’ will match ‘POTATO’
@@ -75,9 +75,9 @@ Format: `distributors`
 
 List all distributors the store is in touch with
 
-=== Search for a distributor: `search`
+=== Search for a distributor: `find`
 
-Format: `search <distributor_name>`
+Format: `find <distributor_name>`
 
 Displays the distributor and basic information related to it
 Adds a distributor to the address book.

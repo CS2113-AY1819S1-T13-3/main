@@ -17,7 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.Assert;
 
-public class XmlAdaptedPersonTest {
+public class XmlAdaptedProductTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -25,9 +25,9 @@ public class XmlAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
+    private static final String VALID_PHONE = BENSON.getSerialNumber().toString();
+    private static final String VALID_EMAIL = BENSON.getDistributor()().toString();
+    private static final String VALID_ADDRESS = BENSON.getProductInfo().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());

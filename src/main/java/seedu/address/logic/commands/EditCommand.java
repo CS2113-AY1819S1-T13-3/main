@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -20,43 +20,40 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
+import seedu.address.model.person.Product;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing product in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the product identified "
+            + "by the index number used in the displayed product list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SERIAL_NR + "Serial Number] "
+            + "[" + PREFIX_DISTRIBUTOR + "Distributor] "
+            + "[" + PREFIX_PRODUCT_INFO + "PRODUCT INFO] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_SERIAL_NR + "91234567 "
+            + PREFIX_DISTRIBUTOR + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Product: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This product already exists in the product list.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the product in the filtered product list to edit
+     * @param editPersonDescriptor details to edit the product with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -69,39 +66,39 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Product> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Product productToEdit = lastShownList.get(index.getZeroBased());
+        Product editedProduct = createEditedPerson(productToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!productToEdit.isSamePerson(editedProduct) && model.hasPerson(editedProduct)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updatePerson(personToEdit, editedPerson);
+        model.updatePerson(productToEdit, editedProduct);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedProduct));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Product} with the details of {@code productToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Product createEditedPerson(Product productToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert productToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editPersonDescriptor.getName().orElse(productToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getSerialNumber().orElse(productToEdit.getSerialNumber());
+        Email updatedEmail = editPersonDescriptor.getDistributor().orElse(productToEdit.getDistributor());
+        Address updatedAddress = editPersonDescriptor.getProductInfo().orElse(productToEdit.getProductInfo());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(productToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Product(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -123,8 +120,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the product with. Each non-empty field value will replace the
+     * corresponding field value of the product.
      */
     public static class EditPersonDescriptor {
         private Name name;
@@ -166,7 +163,7 @@ public class EditCommand extends Command {
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Phone> getSerialNumber() {
             return Optional.ofNullable(phone);
         }
 
@@ -174,7 +171,7 @@ public class EditCommand extends Command {
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<Email> getDistributor() {
             return Optional.ofNullable(email);
         }
 
@@ -182,7 +179,7 @@ public class EditCommand extends Command {
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public Optional<Address> getProductInfo() {
             return Optional.ofNullable(address);
         }
 
@@ -219,9 +216,9 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getSerialNumber().equals(e.getSerialNumber())
+                    && getDistributor().equals(e.getDistributor())
+                    && getProductInfo().equals(e.getProductInfo())
                     && getTags().equals(e.getTags());
         }
     }

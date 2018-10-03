@@ -4,15 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a Product's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {
 
 
     public static final String MESSAGE_PHONE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String PHONE_VALIDATION_REGEX = "\\d{3,}";
+            "Serial numbers should only contain numbers, and it should be at least 1 digit long";
+    public static final String PHONE_VALIDATION_REGEX = "\\d{1,}";
     public final String value;
 
     /**

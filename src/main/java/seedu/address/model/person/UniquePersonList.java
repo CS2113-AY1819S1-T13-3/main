@@ -13,32 +13,32 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A product is considered unique by comparing using {@code Product#isSamePerson(Product)}. As such, adding and updating of
+ * persons uses Product#isSamePerson(Product) for equality so as to ensure that the product being added or updated is
+ * unique in terms of identity in the UniquePersonList. However, the removal of a product uses Product#equals(Object) so
+ * as to ensure that the product with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Product#isSamePerson(Product)
  */
-public class UniquePersonList implements Iterable<Person> {
+public class UniquePersonList implements Iterable<Product> {
 
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Product> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent product as the given argument.
      */
-    public boolean contains(Person toCheck) {
+    public boolean contains(Product toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a product to the list.
+     * The product must not already exist in the list.
      */
-    public void add(Person toAdd) {
+    public void add(Product toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
@@ -47,30 +47,30 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the product {@code target} in the list with {@code editedProduct}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The product identity of {@code editedProduct} must not be the same as another existing product in the list.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Product target, Product editedProduct) {
+        requireAllNonNull(target, editedProduct);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSamePerson(editedProduct) && contains(editedProduct)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedProduct);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent product from the list.
+     * The product must exist in the list.
      */
-    public void remove(Person toRemove) {
+    public void remove(Product toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
@@ -83,27 +83,27 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code products}.
+     * {@code products} must not contain duplicate products.
      */
-    public void setPersons(List<Person> persons) {
-        requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+    public void setPersons(List<Product> products) {
+        requireAllNonNull(products);
+        if (!personsAreUnique(products)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.setAll(persons);
+        internalList.setAll(products);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Person> asUnmodifiableObservableList() {
+    public ObservableList<Product> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<Product> iterator() {
         return internalList.iterator();
     }
 
@@ -120,12 +120,12 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code products} contains only unique products.
      */
-    private boolean personsAreUnique(List<Person> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+    private boolean personsAreUnique(List<Product> products) {
+        for (int i = 0; i < products.size() - 1; i++) {
+            for (int j = i + 1; j < products.size(); j++) {
+                if (products.get(i).isSamePerson(products.get(j))) {
                     return false;
                 }
             }
