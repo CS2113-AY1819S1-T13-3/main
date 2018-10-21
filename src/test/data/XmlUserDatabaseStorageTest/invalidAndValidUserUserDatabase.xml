@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userdatabase>
+    <!-- Valid User -->
+    <users>
+        <username>Hans Muster</username>
+        <password isPrivate="false">9482424</password>
+        <addressbookfilepath isPrivate="false">data\addressbook-Hans Muster.xml</addressbookfilepath>
+    </users>
+    <!-- User with invalid password field -->
+    <users>
+        <username>Hans Muster</username>
+        <password isPrivate="false">pass!</password>
+        <addressbookfilepath isPrivate="false">data\addressbook-Hans Muster.xml</addressbookfilepath>
+    </users>
+</userdatabase>

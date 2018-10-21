@@ -145,17 +145,14 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     /**
      * Adds a user to the User Database.
-     * @throws DuplicateUserException if an equivalent user already exists.
+     * The user must not already exist in the User Database.
      */
-    public void addUser(User user) throws DuplicateUserException {
+    public void addUser(User user) {
         users.add(user);
     }
 
     /**
      * Replaces the given user {@code target} in the list with {@code editedUser}.
-     *
-     * @throws DuplicateUserException if updating the user's details causes the user to be equivalent to
-     *      another existing user in the list.
      * @throws UserNotFoundException if {@code target} could not be found in the list.
      */
     public void updateUserPassword(User target, User userWithNewPassword)
