@@ -66,7 +66,7 @@ public class XmlUserDatabaseStorageTest {
     @Test
     public void readAndSaveUserDatabase_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
-        UserDatabase origin al = getTypicalUserDatabase();
+        UserDatabase original = getTypicalUserDatabase();
         XmlUserDatabaseStorage xmlUserDatabaseStorage = new XmlUserDatabaseStorage(filePath);
 
         //Save in new file and read back
@@ -120,7 +120,7 @@ public class XmlUserDatabaseStorageTest {
     }
 
     @Test
-    public void saveUserDatabase_nullFilePath_throwsNullPointerException() {
+    public void saveUserDatabase_nullFilePath_throwsNullPointerException() throws IOException {
         thrown.expect(NullPointerException.class);
         saveUserDatabase(new UserDatabase(), null);
     }

@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Product;
@@ -23,14 +23,14 @@ public class PersonBuilder {
 
     private Name name;
     private Phone phone;
-    private DistributorName distname;
+    private Email email;
     private Address address;
     private Set<Tag> tags;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        distname = new DistributorName(DEFAULT_EMAIL);
+        email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
@@ -41,7 +41,7 @@ public class PersonBuilder {
     public PersonBuilder(Product productToCopy) {
         name = productToCopy.getName();
         phone = productToCopy.getSerialNumber();
-        distname = productToCopy.getDistributor();
+        email = productToCopy.getDistributor();
         address = productToCopy.getProductInfo();
         tags = new HashSet<>(productToCopy.getTags());
     }
@@ -82,12 +82,12 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Product} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.distname = new DistributorName(email);
+        this.email = new Email(email);
         return this;
     }
 
     public Product build() {
-        return new Product(name, phone, distname, address, tags);
+        return new Product(name, phone, email, address, tags);
     }
 
 }

@@ -19,7 +19,7 @@ import seedu.address.model.person.Product;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Product list contains duplicate product(s).";
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "Product list contains duplicate product(s).";
 
     @XmlElement
     private List<XmlAdaptedDistributor> distributors;
@@ -58,7 +58,7 @@ public class XmlSerializableAddressBook {
         for (XmlAdaptedDistributor d : distributors) {
             Distributor distributor = d.toModelType();
             if (addressBook.hasDistributor(distributor)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PRODUCT);
             }
             addressBook.addDistributor(distributor);
         }
@@ -66,7 +66,7 @@ public class XmlSerializableAddressBook {
         for (XmlAdaptedProduct p : persons) {
             Product product = p.toModelType();
             if (addressBook.hasPerson(product)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PRODUCT);
             }
             addressBook.addPerson(product);
         }

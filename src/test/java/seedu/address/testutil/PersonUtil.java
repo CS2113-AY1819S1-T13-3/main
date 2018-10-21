@@ -47,8 +47,7 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getSerialNumber().ifPresent(phone -> sb.append(PREFIX_SERIAL_NR).append(phone.value).append(" "));
-        descriptor.getDistributor().ifPresent(distname -> sb.append(PREFIX_DISTRIBUTOR)
-                .append(distname.fullDistName).append(" "));
+        descriptor.getDistributor().ifPresent(email -> sb.append(PREFIX_DISTRIBUTOR).append(email.fullDistName).append(" "));
         descriptor.getProductInfo().ifPresent(address -> sb.append(PREFIX_PRODUCT_INFO).append(address.value)
                 .append(" "));
         if (descriptor.getTags().isPresent()) {
