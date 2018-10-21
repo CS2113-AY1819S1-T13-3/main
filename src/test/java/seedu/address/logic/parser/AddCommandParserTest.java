@@ -28,58 +28,62 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.distributor.DistributorName;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Address;
+import seedu.address.model.product.Email;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.Phone;
+import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ProductBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
+    Distributor validDistributor= new Distributor(new DistributorName("Gara"),new DistributorPhone("123123123"));
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Product expectedProduct = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Product expectedProduct = new ProductBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct,validDistributor));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct,validDistributor));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct,validDistributor));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct,validDistributor));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedProduct,validDistributor));
 
         // multiple tags - all accepted
-        Product expectedProductMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Product expectedProductMultipleTags = new ProductBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedProductMultipleTags));
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedProductMultipleTags,validDistributor));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Product expectedProduct = new PersonBuilder(AMY).withTags().build();
+        Product expectedProduct = new ProductBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedProduct));
+                new AddCommand(expectedProduct,validDistributor));
     }
 
     @Test

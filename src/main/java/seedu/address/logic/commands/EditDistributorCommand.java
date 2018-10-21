@@ -40,7 +40,7 @@ public class EditDistributorCommand extends Command {
     private final Index index;
     private final EditDistributorDescriptor editDistributorDescriptor;
     /**
-     * @param index of the person in the filtered distributor list to edit
+     * @param index of the product in the filtered distributor list to edit
      * @param editDistributorDescriptor details to edit the distributor with
      */
     public EditDistributorCommand(Index index, EditDistributorDescriptor editDistributorDescriptor) {
@@ -107,8 +107,8 @@ public class EditDistributorCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the product with. Each non-empty field value will replace the
+     * corresponding field value of the product.
      */
     public static class EditDistributorDescriptor {
         private DistributorName name;

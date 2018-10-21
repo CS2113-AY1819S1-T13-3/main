@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.distributor.Distributor;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a product identified using it's displayed index from the address book.
  */
 public class DeleteDistributorCommand extends Command {
 

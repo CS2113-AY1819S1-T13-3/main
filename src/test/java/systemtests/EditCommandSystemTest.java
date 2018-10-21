@@ -39,13 +39,13 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Address;
+import seedu.address.model.product.Email;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.Phone;
+import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ProductBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class EditCommandSystemTest extends AddressBookSystemTest {
@@ -63,7 +63,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         Index index = INDEX_FIRST_PERSON;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Product editedProduct = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Product editedProduct = new ProductBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedProduct);
 
         /* Case: undo editing the last product in the list -> last product restored */
@@ -89,7 +89,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedProduct = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
+        editedProduct = new ProductBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedProduct);
 
         /* Case: edit a product with new values same as another product's values but with different phone and email
@@ -99,14 +99,14 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         index = INDEX_SECOND_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedProduct = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedProduct = new ProductBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedProduct);
 
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
         Product productToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
-        editedProduct = new PersonBuilder(productToEdit).withTags().build();
+        editedProduct = new ProductBuilder(productToEdit).withTags().build();
         assertCommandSuccess(command, index, editedProduct);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
@@ -117,7 +117,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         productToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
-        editedProduct = new PersonBuilder(productToEdit).withName(VALID_NAME_BOB).build();
+        editedProduct = new ProductBuilder(productToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedProduct);
 
         /* Case: filtered product list, edit index within bounds of address book but out of bounds of product list

@@ -8,21 +8,21 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.model.person.Product;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.product.Product;
+import seedu.address.testutil.ProductBuilder;
 
 public class ProductCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
         // no tags
-        Product productWithNoTags = new PersonBuilder().withTags(new String[0]).build();
+        Product productWithNoTags = new ProductBuilder().withTags(new String[0]).build();
         PersonCard personCard = new PersonCard(productWithNoTags, 1);
         uiPartRule.setUiPart(personCard);
         assertCardDisplay(personCard, productWithNoTags, 1);
 
         // with tags
-        Product productWithTags = new PersonBuilder().build();
+        Product productWithTags = new ProductBuilder().build();
         personCard = new PersonCard(productWithTags, 2);
         uiPartRule.setUiPart(personCard);
         assertCardDisplay(personCard, productWithTags, 2);
@@ -30,7 +30,7 @@ public class ProductCardTest extends GuiUnitTest {
 
     @Test
     public void equals() {
-        Product product = new PersonBuilder().build();
+        Product product = new ProductBuilder().build();
         PersonCard personCard = new PersonCard(product, 0);
 
         // same product, same index -> returns true
@@ -47,7 +47,7 @@ public class ProductCardTest extends GuiUnitTest {
         assertFalse(personCard.equals(0));
 
         // different product, same index -> returns false
-        Product differentProduct = new PersonBuilder().withName("differentName").build();
+        Product differentProduct = new ProductBuilder().withName("differentName").build();
         assertFalse(personCard.equals(new PersonCard(differentProduct, 0)));
 
         // same product, different index -> returns false

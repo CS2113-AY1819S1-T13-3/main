@@ -14,8 +14,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.UniqueDistributorList;
 
-import seedu.address.model.person.Product;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.UniquePersonList;
 import seedu.address.model.saleshistory.SalesHistory;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
@@ -85,7 +85,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
+     * Replaces the contents of the product list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
     public void setDistributors(List<Distributor> distributors) {
@@ -116,7 +116,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a product with the same identity as {@code product} exists in the address book.
      */
     public boolean hasDistributor(Distributor distributor) {
         requireNonNull(distributor);

@@ -21,7 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 public class ProductListPanelTest extends GuiUnitTest {

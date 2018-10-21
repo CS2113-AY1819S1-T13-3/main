@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 
 import seedu.address.model.distributor.Distributor;
 
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 
 
 /**

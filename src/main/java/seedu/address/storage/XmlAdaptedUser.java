@@ -30,7 +30,7 @@ public class XmlAdaptedUser {
     public XmlAdaptedUser() {}
 
     /**
-     * Constructs an {@code XmlAdaptedUser} with the given person details.
+     * Constructs an {@code XmlAdaptedUser} with the given product details.
      */
     public XmlAdaptedUser(String username, String password, String addressbookfilepath) {
         this.username = username;
@@ -50,9 +50,9 @@ public class XmlAdaptedUser {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's User object.
+     * Converts this jaxb-friendly adapted product object into the model's User object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted product
      */
     public User toModelType() throws IllegalValueException {
         if (username == null) {

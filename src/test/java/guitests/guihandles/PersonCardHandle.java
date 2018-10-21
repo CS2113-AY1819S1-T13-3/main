@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 
 /**
  * Provides a handle to a product card in the product list panel.

@@ -10,11 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-// import seedu.address.model.person.Person;
+// import seedu.address.model.product.Person;
 import seedu.address.model.distributor.Distributor;
 
 /**
- * Adds a person to the address book.
+ * Adds a product to the address book.
  */
 public class AddDistributorCommand extends Command {
 

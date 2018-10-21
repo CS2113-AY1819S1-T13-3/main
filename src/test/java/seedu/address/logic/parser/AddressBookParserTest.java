@@ -28,23 +28,27 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.NameContainsKeywordsPredicate;
+import seedu.address.model.product.Product;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ProductBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.distributor.DistributorName;
 
 public class AddressBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private final AddressBookParser parser = new AddressBookParser();
+    Distributor validDistributor= new Distributor(new DistributorName("Gara"),new DistributorPhone("123123123"));
 
     @Test
     public void parseCommand_add() throws Exception {
-        Product product = new PersonBuilder().build();
+        Product product = new ProductBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(product));
-        assertEquals(new AddCommand(product), command);
+        assertEquals(new AddCommand(product,validDistributor), command);
     }
 
     @Test
@@ -62,7 +66,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Product product = new PersonBuilder().build();
+        Product product = new ProductBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(product).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));

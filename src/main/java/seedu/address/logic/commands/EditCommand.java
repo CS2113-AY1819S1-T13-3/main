@@ -21,10 +21,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Address;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.Phone;
+import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -146,7 +146,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
-            setEmail(toCopy.distname);
+            setDistributor(toCopy.distname);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -174,13 +174,15 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(DistributorName distname) {
+        public void setDistributor(DistributorName distname) {
             this.distname = distname;
         }
 
         public Optional<DistributorName> getDistributor() {
             return Optional.ofNullable(distname);
         }
+
+
 
         public void setAddress(Address address) {
             this.address = address;

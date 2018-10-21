@@ -20,7 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.TestStorage;
 import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for

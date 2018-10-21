@@ -19,7 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.User;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 
 /**
  * The main LogicManager of the app.

@@ -24,9 +24,15 @@ import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
+import seedu.address.model.timeidentifiedclass.shopday.Reminder;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ProductBuilder;
+import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.distributor.DistributorName;
+
 
 public class AddCommandTest {
 
@@ -36,19 +42,20 @@ public class AddCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
+    Distributor validDistributor= new Distributor(new DistributorName("Gara"),new DistributorPhone("123123123"));
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new AddCommand(null,validDistributor);
     }
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Product validProduct = new PersonBuilder().build();
+        Product validProduct = new ProductBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validProduct).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCommand(validProduct,validDistributor).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validProduct), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validProduct), modelStub.personsAdded);
@@ -57,8 +64,8 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Product validProduct = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validProduct);
+        Product validProduct = new ProductBuilder().build();
+        AddCommand addCommand = new AddCommand(validProduct,validDistributor);
         ModelStub modelStub = new ModelStubWithPerson(validProduct);
 
         thrown.expect(CommandException.class);
@@ -68,16 +75,16 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Product chocolate = new PersonBuilder().withName("Chocolate").build();
-        Product candy = new PersonBuilder().withName("Candy").build();
-        AddCommand addChocolateCommand = new AddCommand(chocolate);
-        AddCommand addCandyCommand = new AddCommand(candy);
+        Product chocolate = new ProductBuilder().withName("Chocolate").build();
+        Product candy = new ProductBuilder().withName("Candy").build();
+        AddCommand addChocolateCommand = new AddCommand(chocolate,validDistributor);
+        AddCommand addCandyCommand = new AddCommand(candy,validDistributor);
 
         // same object -> returns true
         assertTrue(addChocolateCommand.equals(addChocolateCommand));
 
         // same values -> returns true
-        AddCommand addChocolateCommandCopy = new AddCommand(chocolate);
+        AddCommand addChocolateCommandCopy = new AddCommand(chocolate,validDistributor);
         assertTrue(addChocolateCommand.equals(addChocolateCommandCopy));
 
         // different types -> returns false
@@ -197,6 +204,16 @@ public class AddCommandTest {
         @Override
         public void addTransaction(Transaction transaction) {
 
+        }
+
+        @Override
+        public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
+
+        }
+
+        @Override
+        public ArrayList<Reminder> getDueRemindersInActiveShopDay() {
+            return null;
         }
 
         @Override
