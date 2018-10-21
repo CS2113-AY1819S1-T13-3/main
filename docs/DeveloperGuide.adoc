@@ -246,9 +246,17 @@ This section describes some noteworthy details on how certain features are imple
 ===== Login
 The following sequence diagram shows how the user authentication process works: +
 
+image::AuthenticationSequenceDiagram.png[width="800"]
+
+Without authentication, user commands are limited.
+
 ===== Logout
 
+The logout feature works similarly to the login feature. This allow the user to secure his data.
+
 ==== Design Considerations
+
+
 // end::authentication[]
 // tag::undoredo[]
 === Undo/Redo feature

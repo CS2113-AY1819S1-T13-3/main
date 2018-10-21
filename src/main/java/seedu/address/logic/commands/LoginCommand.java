@@ -42,7 +42,7 @@ public class LoginCommand extends Command {
         requireNonNull(username);
         requireNonNull(password);
         try {
-            if (model.checkLoginCredentials(this.username, this.password)) {
+            if (model.checkAuthentication(this.username, this.password)) {
                 return new CommandResult(MESSAGE_AUTHENTICATION_SUCCESS);
             } else {
                 return new CommandResult(MESSAGE_AUTHENTICATION_FAILURE);

@@ -192,7 +192,7 @@ public interface Model {
      */
     void addUser(User person) throws DuplicateUserException;
 
-    boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException;
+    boolean checkAuthentication(Username username, Password password) throws AuthenticatedException;
 
     boolean checkCredentials(Username username, Password password) throws AuthenticatedException;
 
