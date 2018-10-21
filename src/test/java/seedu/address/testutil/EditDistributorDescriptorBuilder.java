@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.EditDistributorCommand.EditDistributorDescriptor;
+import seedu.address.logic.commands.EditDCommand.EditDistributorDescriptor;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;

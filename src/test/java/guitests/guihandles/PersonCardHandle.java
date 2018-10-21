@@ -18,7 +18,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
-    private static final String DIST_FIELD_ID = "#distname";
+    private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
@@ -35,7 +35,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         nameLabel = getChildNode(NAME_FIELD_ID);
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
-        emailLabel = getChildNode(DIST_FIELD_ID);
+        emailLabel = getChildNode(EMAIL_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -79,7 +79,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return getName().equals(product.getName().fullName)
                 && getProductInfo().equals(product.getProductInfo().value)
                 && getSerialNumber().equals(product.getSerialNumber().value)
-                && getDistributor().equals(product.getDistributor().fullDistName)
+                && getDistributor().equals(product.getDistributor().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(product.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
