@@ -82,7 +82,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(1000, 500, 300, 100);
-        userPrefs.setProductDatabaseFilePath(Paths.get("addressbook.xml"));
+        userPrefs.setProductDatabaseFilePath(Paths.get("data/products.xml"));
         return userPrefs;
     }
 
