@@ -1,4 +1,6 @@
 = Inventarie Pro
+
+image:https://api.codacy.com/project/badge/Grade/f9e88d85d0ff4c559d9df90b824ce149[link="https://app.codacy.com/app/amirulmaricar/main?utm_source=github.com&utm_medium=referral&utm_content=CS2113-AY1819S1-T13-3/main&utm_campaign=Badge_Grade_Dashboard"]
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S1-T13-3/main[image:https://travis-ci.org/CS2113-AY1819S1-T13-3/main.svg?branch=master[Build Status]]
