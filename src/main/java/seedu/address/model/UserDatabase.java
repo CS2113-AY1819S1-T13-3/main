@@ -142,6 +142,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
                 Paths.get(DB_FILEPATH_FOLDER, DB_FILEPATH_PREFIX + username + DB_FILEPATH_POSTFIX),
                 Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_PREFIX));
         logger.fine("Attempting to check credentials for permissions.");
+
         if (!hasLoggedIn) {
             return users.contains(toCheck);
         } else {

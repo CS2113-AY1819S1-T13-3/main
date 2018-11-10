@@ -26,6 +26,7 @@ public class SampleUsersUtil {
                     Paths.get(ALEX_AB_PATH), Paths.get(ALEX_DB_PATH), Paths.get(ALEX_SALESHISTORY_PATH)),
             new User(new Username("bernice"), new Password("99272758"),
                     Paths.get(BERNICE_AB_PATH), Paths.get(BERNICE_DB_PATH), Paths.get(BERNICE_SALESHISTORY_PATH))
+
         };
     }
 

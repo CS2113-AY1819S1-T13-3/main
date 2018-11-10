@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,7 +45,7 @@ public class XmlDistributorBookStorage implements DistributorBookStorage {
      * @throws DataConversionException if the file is not in the correct format.
      */
     public Optional<ReadOnlyDistributorBook> readDistributorBook(Path filePath) throws DataConversionException,
-                                                                                 FileNotFoundException {
+                                                                                 IOException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {

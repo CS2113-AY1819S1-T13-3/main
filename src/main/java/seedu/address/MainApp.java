@@ -32,6 +32,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleDistributorsUtil;
 import seedu.address.model.util.SampleUsersUtil;
+import seedu.address.storage.EncryptorUtil;
 import seedu.address.storage.DistributorBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.ProductDatabaseStorage;
@@ -88,6 +89,7 @@ public class MainApp extends Application {
 
         initLogging(config);
 
+
         model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model);
@@ -109,6 +111,7 @@ public class MainApp extends Application {
         ReadOnlyUserDatabase initialUsers;
         Optional<ReadOnlyDistributorBook> distributorBookOptional;
         ReadOnlyDistributorBook initialDist;
+
         try {
             userDatabaseOptional = storage.readUserDatabase();
             if (!userDatabaseOptional.isPresent()) {
@@ -116,12 +119,13 @@ public class MainApp extends Application {
             }
             initialUsers = userDatabaseOptional.orElseGet(SampleUsersUtil::getSampleUserDatabase);
         } catch (DataConversionException e) {
-            logger.warning("Users file not in the correct format. Will be starting with an empty ProductDatabase");
+            logger.warning("Users file not in the correct format. Will be starting with an empty UserDatabase");
             initialUsers = new UserDatabase();
         } catch (IOException e) {
-            logger.warning("Users while reading from the file. Will be starting with an empty ProductDatabase");
+            logger.warning("Users while reading from the file. Will be starting with an empty UserDatabase");
             initialUsers = new UserDatabase();
         }
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
