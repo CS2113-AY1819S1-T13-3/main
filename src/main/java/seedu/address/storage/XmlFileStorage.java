@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.io.IOException;
-import java.io.IOException;
 import java.nio.file.Path;
 
 import javax.xml.bind.JAXBException;

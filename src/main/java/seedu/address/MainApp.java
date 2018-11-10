@@ -72,6 +72,7 @@ public class MainApp extends Application {
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
+        EncryptorUtil.loadKey();
 
         UserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(config.getUserPrefsFilePath());
