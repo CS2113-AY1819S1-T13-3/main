@@ -1,7 +1,5 @@
 package seedu.address.commons.util;
 
-import seedu.address.storage.EncryptorUtil;
-
 import static java.util.Objects.requireNonNull;
 
 import java.io.FileNotFoundException;
@@ -13,6 +11,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+
+import seedu.address.storage.EncryptorUtil;
 
 /**
  * Helps with reading from and writing to XML files.
