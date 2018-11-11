@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 
 import javax.xml.bind.JAXBException;
@@ -16,7 +16,7 @@ public class XmlFileStorage {
      * Saves the given addressbook data to the specified file.
      */
     public static void saveDataToFile(Path file, XmlSerializableProductDatabase addressBook)
-            throws FileNotFoundException {
+            throws IOException {
         try {
             XmlUtil.saveDataToFile(file, addressBook);
         } catch (JAXBException e) {
@@ -28,7 +28,7 @@ public class XmlFileStorage {
      * Returns address book in the file or an empty address book
      */
     public static XmlSerializableProductDatabase loadDataFromSaveFile(Path file) throws DataConversionException,
-                                                                            FileNotFoundException {
+                                                                            IOException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableProductDatabase.class);
         } catch (JAXBException e) {
@@ -40,7 +40,7 @@ public class XmlFileStorage {
      * Saves the given distributorbook data to the specified file.
      */
     public static void saveDistributorDataToFile(Path file, XmlSerializableDistributorBook distributorBook)
-            throws FileNotFoundException {
+            throws IOException {
         try {
             XmlUtil.saveDataToFile(file, distributorBook);
         } catch (JAXBException e) {
@@ -53,7 +53,7 @@ public class XmlFileStorage {
      */
     public static XmlSerializableDistributorBook loadDistributorDataFromSaveFile(Path file)
             throws DataConversionException,
-            FileNotFoundException {
+            IOException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableDistributorBook.class);
         } catch (JAXBException e) {
@@ -65,7 +65,7 @@ public class XmlFileStorage {
      * Saves the given user database data to the specified file.
      */
     public static void saveUsersToFile(Path file, XmlSerializableUserDatabase userDatabase)
-            throws FileNotFoundException {
+            throws IOException {
         try {
             XmlUtil.saveDataToFile(file, userDatabase);
         } catch (JAXBException e) {
@@ -77,7 +77,7 @@ public class XmlFileStorage {
      * Returns user database in the file or an empty address book
      */
     public static XmlSerializableUserDatabase loadUsersFromSaveFile(Path file) throws DataConversionException,
-            FileNotFoundException {
+            IOException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableUserDatabase.class);
         } catch (JAXBException e) {
@@ -89,7 +89,7 @@ public class XmlFileStorage {
      * Saves the {@code SalesHistory} data to the specified file
      */
     public static void saveSalesHistoryToFile(Path file, XmlSerializableSalesHistory salesHistory)
-            throws FileNotFoundException {
+            throws IOException {
         try {
             XmlUtil.saveDataToFile(file, salesHistory);
         } catch (JAXBException e) {
@@ -101,7 +101,7 @@ public class XmlFileStorage {
      * Returns {@code XmlSerializableSalesHistory} from the file.
      */
     public static XmlSerializableSalesHistory loadSalesHistoryFromFile(Path file) throws DataConversionException,
-            FileNotFoundException {
+            IOException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableSalesHistory.class);
         } catch (JAXBException e) {
