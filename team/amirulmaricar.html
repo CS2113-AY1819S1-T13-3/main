@@ -50,7 +50,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.1</code> - <code>v1.3.2</code> (6 releases) on GitHub</p>
+<p>Managed releases <code>v1.1</code> - <code>v1.4</code> (7 releases) on GitHub</p>
 </li>
 </ul>
 </div>
@@ -64,6 +64,12 @@
 </li>
 <li>
 <p>Wrote additional tests for existing features to increase coverage from 30% to 42% (Pull requests <a href="https://github.com/CS2113-AY1819S1-T13-3/main/pull/179">#179</a>, <a href="https://github.com/CS2113-AY1819S1-T13-3/main/pull/186">#186</a>)</p>
+</li>
+<li>
+<p>Wrote additional tests for existing features to increase coverage from 49% to 55% (Pull request <a href="https://github.com/CS2113-AY1819S1-T13-3/main/pull/207">#207</a>)</p>
+</li>
+<li>
+<p>Proposed data encryption for v2.0 (Pull request <a href="https://github.com/CS2113-AY1819S1-T13-3/main/pull/177">#177</a>)</p>
 </li>
 </ul>
 </div>
@@ -218,6 +224,113 @@ Format: <code>deregister u/USERNAME p/PASSWORD</code><br></p>
 </tbody>
 </table>
 <div class="sect2">
+<h3 id="storage-component"><a class="link" href="#storage-component">Storage component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
+</div>
+<div class="title">Figure 1. Structure of the Storage Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/productInfo/storage/Storage.java"><code>Storage.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Storage</code> component,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>can save <code>UserPref</code> objects in json format and read it back.</p>
+</li>
+<li>
+<p>can save the Distributor Book data in xml format and read it back.</p>
+</li>
+<li>
+<p>can save the User Database data in xml format and read it back.</p>
+</li>
+<li>
+<p>can save the Product Database data in xml format and read it back.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="model-component"><a class="link" href="#model-component">Model component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+</div>
+<div class="title">Figure 2. Structure of the Model Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/productInfo/model/Model.java"><code>Model.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Model</code>,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
+</li>
+<li>
+<p>stores the</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Product data</p>
+</li>
+<li>
+<p>Distributor Book data</p>
+</li>
+<li>
+<p>User data</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>exposes an unmodifiable</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>ObservableList&lt;Product&gt;</code></p>
+</li>
+<li>
+<p><code>ObservableList&lt;Distributor&gt;</code></p>
+</li>
+<li>
+<p><code>ObservableList&lt;Transaction&gt;</code></p>
+</li>
+<li>
+<p><code>ObservableList&lt;Reminder&gt;</code> <br></p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* does not depend on any of the other three components.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As a more OOP model, we can store a <code>Tag</code> list in both <code>Product Database</code> and <code>Distributor Book</code>, which <code>Product</code>/<code>Distributor</code>
+can reference. This would allow <code>Product Database</code> and <code>Distributor Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Product</code>/<code>Distributor</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+<br>
+<span class="image"><img src="../images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
 <h3 id="authentication-2"><a class="link" href="#authentication-2">Authentication</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
@@ -306,9 +419,29 @@ When the user is logged out, some of the user commands are limited. This is hand
 <li>
 <p><strong>Alternative 1 (current choice):</strong> All users stored collectively in one XML file.
 (users.xml)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Inexpensive and adapts well to existing codebase</p>
+</li>
+<li>
+<p>Cons: Maintenance</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>Alternative 2:</strong> SQL/NoSQL Databases.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Powerful and stable</p>
+</li>
+<li>
+<p>Cons: Complexity</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -360,9 +493,33 @@ Additionally, it implements the following operations:</p>
 <ul>
 <li>
 <p><strong>Alternative 1 (proposed choice):</strong> Intercept <code>XMLUtil</code> when reading and saving XML Storage files.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:    Best practice</p>
 </li>
 <li>
-<p><strong>Aleternative 2:</strong> Individual encrypt and decrypt command.</p>
+<p>Cons:    Require remodeling of application</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Individual encrypt and decrypt command.</p>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Create temporary file to contain decrypted data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:    This will work with current architecture style.</p>
+</li>
+<li>
+<p>Cons:    Bad information security practice as there is a momentary
+vulnerability.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -370,4 +527,4 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:09:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:27:06 UTC</div></div></div></body></html>

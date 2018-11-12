@@ -713,9 +713,29 @@ When the user is logged out, some of the user commands are limited. This is hand
 <li>
 <p><strong>Alternative 1 (current choice):</strong> All users stored collectively in one XML file.
 (users.xml)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Inexpensive and adapts well to existing codebase</p>
+</li>
+<li>
+<p>Cons: Maintenance</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>Alternative 2:</strong> SQL/NoSQL Databases.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Powerful and stable</p>
+</li>
+<li>
+<p>Cons: Complexity</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1060,9 +1080,33 @@ Additionally, it implements the following operations:</p>
 <ul>
 <li>
 <p><strong>Alternative 1 (proposed choice):</strong> Intercept <code>XMLUtil</code> when reading and saving XML Storage files.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:    Best practice</p>
 </li>
 <li>
-<p><strong>Aleternative 2:</strong> Individual encrypt and decrypt command.</p>
+<p>Cons:    Require remodeling of application</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Individual encrypt and decrypt command.</p>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Create temporary file to contain decrypted data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:    This will work with current architecture style.</p>
+</li>
+<li>
+<p>Cons:    Bad information security practice as there is a momentary
+vulnerability.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2782,4 +2826,4 @@ Expected: All products should be visible again and a message saying that all pro
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:09:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:27:06 UTC</div></div></div></body></html>
