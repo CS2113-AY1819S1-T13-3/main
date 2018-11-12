@@ -34,8 +34,8 @@
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
 <li><a href="#storing-transactions-feature">3.5. Storing Transactions Feature</a></li>
-<li><a href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></li>
-<li><a href="#proposed-thread-due-reminders">3.7. [Proposed] Thread Due Reminders</a></li>
+<li><a href="#storing-reminders-feature">3.6. Storing Reminders Feature</a></li>
+<li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -995,21 +995,27 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>The storage of transactions is facilitated by the <code>SalesHistory</code>, <code>ShopDay</code> and <code>Transactions</code> classes.</p>
+<p>The storage of transactions is facilitated by the <code>SalesHistory</code> and <code>Transactions</code> classes.</p>
 </li>
 <li>
 <p>When <code>AddressBook</code> is loaded, it creates an object of the <code>SalesHistory</code> class using the <code>SalesHistory</code> default
-constructor. The SalesHistory default constructor initialises its <code>ActiveDay</code> as the current day.</p>
+constructor, which uses data read from that specific user&#8217;s saleshistory <code>.xml</code> file.
+When the file is not found/not in the correct format, the user will begin with an empty saleshistory.</p>
 </li>
 <li>
-<p>Now, when the user inputs <code>transaction pr/&lt;product name&gt; pr/&lt;product name&gt; &#8230;&#8203; pr/product name&gt;</code> into the CLI, the
-<code>AddressBookParser</code> processes this command and creates an object of type <code>AddTransactionCommand</code>.</p>
+<p>When the user inputs <code>transaction pr/&lt;product name&gt; pr/&lt;product name&gt; &#8230;&#8203; pr/product name&gt;</code> into the CLI, the
+<code>AddTransactionCommandParser</code> processes this command and creates an object of type <code>AddTransactionCommand</code>.</p>
 </li>
 <li>
-<p><code>LogicManager</code> receives this command object and executes it. In its execution, the transaction is added to the current
-day, that is, the active <code>ShopDay</code> in the <code>SalesHistory</code> of <code>AddressBook</code>.</p>
+<p><code>LogicManager</code> receives this command object and executes it. In its execution, the saleshistory is updated
+with the required transaction and raises an event for the user&#8217;s saleshistory file on the hard disk to be updated.</p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/transactionsequencediagram.png" alt="transactionsequencediagram">
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1018,8 +1024,8 @@ day, that is, the active <code>ShopDay</code> in the <code>SalesHistory</code> o
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-It is important to note that the <code>ShopDay</code> class stores each <code>Transaction</code> on a <code>TreeMap</code>, where each <code>Transaction</code> has
-its <code>reminderTime</code> as its key. This is to facilitate quick access to any transaction on a given day, and to maintain
+It is important to note that the <code>SalesHistory</code> class stores each <code>Transaction</code> on a <code>TreeMap</code>, where each <code>Transaction</code> has
+its <code>transactionTime</code> as its key. This is to facilitate quick access to any transaction on a given day for large number of transactions, and to maintain
 the <code>Transaction</code> objects in order of their creation times within memory.
 </td>
 </tr>
@@ -1031,14 +1037,59 @@ the <code>Transaction</code> objects in order of their creation times within mem
 <div class="paragraph">
 <p>Currently, the <code>Transaction</code> objects are stored on a <code>TreeMap</code> to maintain their chronological order in memory. However,
 should this prove non-essential, this will be redone on a <code>HashMap</code> to facilitate quicker access and easier handling in
-the code.</p>
+the code.
+Alternatively, using the <code>ObservableList</code> may be sufficient if it turns out the sales volumes are small.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></h3>
+<h3 id="storing-reminders-feature"><a class="link" href="#storing-reminders-feature">3.6. Storing Reminders Feature</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The storage of reminders is facilitated by the <code>SalesHistory</code> and the <code>Reminders</code> classes.</p>
+</li>
+<li>
+<p>When <code>AddressBook</code> is loaded, it creates an object of the <code>SalesHistory</code> class using the <code>SalesHistory</code> default
+constructor, which uses data read from that specific user&#8217;s saleshistory <code>.xml</code> file.
+When the file is not found/not in the correct format, the user will begin with an empty saleshistory</p>
+</li>
+<li>
+<p>When the user stores a reminder, the <code>reminderTime</code> is used as the key. Hence, <code>Reminder</code>
+is a <code>TimeIdentifiedClass</code></p>
+</li>
+<li>
+<p>Each reminder is marked as not yet due for completion at the time of their creation.</p>
+</li>
+<li>
+<p>Every second, <code>threadduereminders</code> command is sent from CommandBox. This compares the current time against the stored reminder times to
+determine which reminders have reached their deadlines. If there are any reminders due,
+the user receives a message for the same, and the reminder is marked as viewed by the thread.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/remindersequencediagram.png" alt="remindersequencediagram" width="800">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>Reminders</code> are stored on a <code>TreeMap</code>, similar to the <code>Transaction</code>, in <code>SalesHistory</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.6.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.7.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>Data needs to be encrypted to protect from unauthorized access.
 The process to transform data stored in the databases is to be facilitated by <code>DataEncryptionUtil</code> class.
@@ -1060,7 +1111,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.7.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-possible-schemes"><a class="link" href="#aspect-possible-schemes">Aspect: Possible schemes</a></h5>
 <div class="ulist">
@@ -1112,10 +1163,6 @@ vulnerability.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="proposed-thread-due-reminders"><a class="link" href="#proposed-thread-due-reminders">3.7. [Proposed] Thread Due Reminders</a></h3>
-
 </div>
 </div>
 </div>
@@ -2826,4 +2873,4 @@ Expected: All products should be visible again and a message saying that all pro
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:31:29 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:36:09 UTC</div></div></div></body></html>
