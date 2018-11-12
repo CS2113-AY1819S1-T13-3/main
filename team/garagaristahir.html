@@ -22,7 +22,7 @@
 <h2 id="summary-of-contribution"><a class="link" href="#summary-of-contribution">Summary of contribution</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>LINK TO CODE CONTTIBUTION</p>
+<p>LINK TO CODE CONTRIBUTION</p>
 </div>
 <div class="sect3">
 <h4 id="main-feature-implemented"><a class="link" href="#main-feature-implemented">Main feature implemented:</a></h4>
@@ -62,26 +62,26 @@
 </div>
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>I integrated Paras feature "Transaction" with my attribute Remaining items. Now when a transaction is made the program subtracts the remaining items. It also first checks if the products exist in the inventory. It then sees if there is enough products in the inventory to make the transaction.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="other-contributions"><a class="link" href="#other-contributions">Other contributions:</a></h4>
-<div class="paragraph">
-<p>I integrated Paras feature "Transaction" with my attribute Remaining items.
-Now when a transaction is made the program subtracts the remaining items. It also first checks if the products exist in the inventory. It then sees if there is enough products in the inventory to make the transaction.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="minor-contributions"><a class="link" href="#minor-contributions">Minor contributions:</a></h4>
 <div class="ulist">
 <ul>
 <li>
 <p>The user can search for a product with both name and Serialnumber (The primary key)</p>
 </li>
 <li>
-<p>I changed transaction so that it is made with serialnumber and not name. (Becuase serialNumber is the primary key).</p>
+<p>I have adapted existing tests to work with the new program.</p>
 </li>
 <li>
-<p>I have adapted existing tests to work with the new program.</p>
+<p>I increased the test coverage from 42% to 48%.</p>
 </li>
 <li>
 <p>I assigned all the issues that we got during practical exam to the correct team member(s)</p>
@@ -108,6 +108,13 @@ Now when a transaction is made the program subtracts the remaining items. It als
 <img src="../images/orgUI.png" alt="orgUI" width="730">
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>I added a picture of the new UI to the User Guide.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -126,18 +133,18 @@ Now when a transaction is made the program subtracts the remaining items. It als
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all products using the <code>list</code> command. Multiple products in the list.</p>
+<p>Prerequisites: There should be multiple products in the list.</p>
 </li>
 <li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+<p>Test case: <code>deleteproduct 1</code><br>
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.</p>
 </li>
 <li>
-<p>Test case: <code>delete 0</code><br>
+<p>Test case: <code>deleteproduct 0</code><br>
 Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>deleteproduct</code>, <code>deleteproduct x</code> (where x is larger than the list size) <em>{give more}</em><br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -158,7 +165,7 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: There should be a atleast 2 products to edit. The second one has Serial Number = 123.</p>
+<p>Prerequisites: There should be a at least 2 products to edit. The second one has Serial Number = 123.</p>
 </li>
 <li>
 <p>Test case: <code>editproduct 1 inv/12</code><br>
@@ -169,8 +176,8 @@ Expected: First product from the list is edited. The current inventory should no
 Expected: No product is updated. Error details of invalid serialnumber because a product with serial number = 123 already exists  is shown in the result display panel. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect edit commands to try: <code>delete x n/y</code> (where x is larger than the list size and y does not exist)<br>
-Expected: Error details of invalid index is shown in the result display panel.</p>
+<p>Other incorrect edit commands to try: <code>deleteproduct x n/y</code> (where x is larger than the list size and y does not exist)<br>
+Expected: Error details of invalid command format is shown in the result display panel.</p>
 </li>
 </ol>
 </div>
@@ -183,9 +190,10 @@ Expected: Error details of invalid index is shown in the result display panel.</
 </div>
 <div class="sect2">
 <h3 id="listing-all-products"><a class="link" href="#listing-all-products">Listing all products</a></h3>
-<div class="paragraph">
-<p>.</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Listing all products</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -194,6 +202,9 @@ Expected: Error details of invalid index is shown in the result display panel.</
 <li>
 <p>Test case: <code>listproducts</code><br>
 Expected: All products should be visible again and a message saying that all products are listed should appear in the result display panel.</p>
+</li>
+</ol>
+</div>
 </li>
 </ol>
 </div>
@@ -555,4 +566,4 @@ Expected: All products should be visible again and a message saying that all pro
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:44:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:09:43 UTC</div></div></div></body></html>

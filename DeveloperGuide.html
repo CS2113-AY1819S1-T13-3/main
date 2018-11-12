@@ -1816,7 +1816,7 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <p>Modify the constructor of <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/productInfo/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to take in the number of products when the application just started.</p>
 </li>
 <li>
-<p>Use <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/productInfo/ui/StatusBarFooter.java"><code>StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)</code></a> to update the number of products whenever there are new changes to the addressbook.</p>
+<p>Use <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/productInfo/ui/StatusBarFooter.java"><code>StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)</code></a> to update the number of products whenever there are new changes to the Product Database.</p>
 </li>
 <li>
 <p>For tests, modify <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/test/java/guitests/guihandles/StatusBarFooterHandle.java"><code>StatusBarFooterHandle</code></a> by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.</p>
@@ -1898,7 +1898,7 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
 </div>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are a software maintainer for <code>addressbook</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
+<p><strong>Scenario:</strong> You are a software maintainer for <code>Product Database</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
 </div>
 <div class="sect3">
 <h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
@@ -2685,18 +2685,18 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all products using the <code>list</code> command. Multiple products in the list.</p>
+<p>Prerequisites: There should be multiple products in the list.</p>
 </li>
 <li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+<p>Test case: <code>deleteproduct 1</code><br>
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.</p>
 </li>
 <li>
-<p>Test case: <code>delete 0</code><br>
+<p>Test case: <code>deleteproduct 0</code><br>
 Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>deleteproduct</code>, <code>deleteproduct x</code> (where x is larger than the list size) <em>{give more}</em><br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -2717,10 +2717,10 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: There should be a atleast 2 products to edit. The second one has Serial Number = 123.</p>
+<p>Prerequisites: There should be a at least 2 products to edit. The second one has Serial Number = 123.</p>
 </li>
 <li>
-<p>Test case: <code>Editproduct 1 inv/12</code><br>
+<p>Test case: <code>editproduct 1 inv/12</code><br>
 Expected: First product from the list is edited. The current inventory should now be 12, and a success message is shown in the result display panel.</p>
 </li>
 <li>
@@ -2728,8 +2728,8 @@ Expected: First product from the list is edited. The current inventory should no
 Expected: No product is updated. Error details of invalid serialnumber because a product with serial number = 123 already exists  is shown in the result display panel. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect edit commands to try: <code>delete x n/y</code> (where x is larger than the list size and y does not exist)<br>
-Expected: Error details of invalid index is shown in the result display panel.</p>
+<p>Other incorrect edit commands to try: <code>deleteproduct x n/y</code> (where x is larger than the list size and y does not exist)<br>
+Expected: Error details of invalid command format is shown in the result display panel.</p>
 </li>
 </ol>
 </div>
@@ -2742,9 +2742,10 @@ Expected: Error details of invalid index is shown in the result display panel.</
 </div>
 <div class="sect2">
 <h3 id="listing-all-products"><a class="link" href="#listing-all-products">H.5. Listing all products</a></h3>
-<div class="paragraph">
-<p>.</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Listing all products</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -2753,6 +2754,9 @@ Expected: Error details of invalid index is shown in the result display panel.</
 <li>
 <p>Test case: <code>listproducts</code><br>
 Expected: All products should be visible again and a message saying that all products are listed should appear in the result display panel.</p>
+</li>
+</ol>
+</div>
 </li>
 </ol>
 </div>
@@ -2778,4 +2782,4 @@ Expected: All products should be visible again and a message saying that all pro
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:44:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:09:43 UTC</div></div></div></body></html>
