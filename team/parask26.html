@@ -134,6 +134,138 @@ and the creation of SalesHistory class with other associated classes.</p>
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="sales-history"><a class="link" href="#sales-history">Sales History</a></h3>
+<div class="sect3">
+<h4 id="add-a-transaction-code-transaction-code"><a class="link" href="#add-a-transaction-code-transaction-code">Add a transaction: <code>transaction</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>transaction pr/PRODUCT_NAME pr/PRODUCT_NAME &#8230;&#8203; pr/PRODUCT_NAME</code></p>
+</div>
+<div class="paragraph">
+<p>Adds a transaction to the record for the given day.
+The time of the transaction, names of the products, and
+individual product quantities will be stored.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transaction pr/Apple pr/Banana pr/Cherries</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="making-a-transaction-while-there-is-multiple-products-with-the-same-name-code-coming-in-v2-0-code"><a class="link" href="#making-a-transaction-while-there-is-multiple-products-with-the-same-name-code-coming-in-v2-0-code">Making a transaction while there is multiple products with the same name <code>[coming in v2.0]</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="view-the-latest-transaction-code-latest-code"><a class="link" href="#view-the-latest-transaction-code-latest-code">View the latest transaction: <code>latest</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>latest</code></p>
+</div>
+<div class="paragraph">
+<p>Displays the details of the latest transaction.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="view-all-the-transactions-for-a-given-day-code-alltransactions-code"><a class="link" href="#view-all-the-transactions-for-a-given-day-code-alltransactions-code">View all the transactions for a given day: <code>alltransactions</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>alltransactions time/&lt;yyyy/MM/dd&gt;</code></p>
+</div>
+<div class="paragraph">
+<p>Displays the timings for all the transactions made on a specified day.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="view-the-details-for-a-given-transaction-code-viewtransaction-code"><a class="link" href="#view-the-details-for-a-given-transaction-code-viewtransaction-code">View the details for a given transaction: <code>viewtransaction</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>viewtransaction time/&lt;yyyy/MM/dd HH:mm:ss&gt;</code></p>
+</div>
+<div class="paragraph">
+<p>Displays the details of a transaction made on a given date and time.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It is important to note that there must be a single space between 'dd' and 'HH'
+in the command format.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-a-reminder-code-setreminder-code"><a class="link" href="#add-a-reminder-code-setreminder-code">Add a reminder: <code>setreminder</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>addreminder time/ &lt;yyyy/MM/dd HH:mm:ss&gt; message/&lt;The reminder message&gt;</code></p>
+</div>
+<div class="paragraph">
+<p>Sets and stores a reminder. The reminder notification will appear once
+the reminder time has elapsed.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All reminders must have unique times.</p>
+</li>
+<li>
+<p>There must only be a single space between "dd" and "HH" in the command format.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addreminder time/ 2018/07/30 18:20:31 message/Throw rubbish</code></p>
+</li>
+<li>
+<p><code>addreminder time/ 2019/11/22 21:31:11 message/Milk delivery</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="view-due-reminder-notifcations-code-duereminders-code"><a class="link" href="#view-due-reminder-notifcations-code-duereminders-code">View due reminder notifcations: <code>duereminders</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>duereminders</code>
+Displays all reminders that are still due.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="view-all-reminders-code-allreminders-code"><a class="link" href="#view-all-reminders-code-allreminders-code">View all reminders: <code>allreminders</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>allreminders</code></p>
+</div>
+<div class="paragraph">
+<p>Shows all reminders that are in the system.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="remove-a-reminder"><a class="link" href="#remove-a-reminder">Remove a Reminder</a></h4>
+<div class="paragraph">
+<p>Format: <code>removereminder time/&lt;yyyy/MM/dd HH:mm:ss&gt;</code></p>
+</div>
+<div class="paragraph">
+<p>Removes a reminder in the system. There must only be a single
+space between "dd" and "HH" in the command format.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>removereminder time/ 2018/10/26 12:30:00</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -248,4 +380,4 @@ The <code>Reminders</code> are stored on a <code>TreeMap</code>, similar to the 
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:45:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:54:44 UTC</div></div></div></body></html>
